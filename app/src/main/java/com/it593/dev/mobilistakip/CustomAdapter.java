@@ -11,9 +11,7 @@ import com.google.firebase.auth.FirebaseUser;
 
 import java.util.ArrayList;
 
-/**
- * Created by alper on 16/07/2017.
- */
+
 
 public class CustomAdapter extends ArrayAdapter<Message> {
 

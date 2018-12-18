@@ -1,8 +1,5 @@
 package com.it593.dev.mobilistakip;
 
-/**
- * Created by alper on 16/07/2017.
- */
 
 public class Message {
 
