@@ -23,6 +23,8 @@ public class HomeActivity extends AppCompatActivity {
     private ArrayList<String> subjectLists = new ArrayList<>();
 
 
+
+
     private ArrayAdapter<String> adapter;
 
     @Override
@@ -37,7 +39,9 @@ public class HomeActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
 
-
+        subjectLists.add("Ahmet");
+        subjectLists.add("Ayşe");
+        subjectLists.add("Seda");
 
         listView = (ListView)findViewById(R.id.listViewSubjects);
 
