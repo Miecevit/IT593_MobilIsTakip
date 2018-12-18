@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#c19d67"
-    tools:context="com.mobilhanem.firebasechatandroidapp.HomeActivity">
+    tools:context="com.it593.dev.mobilistakip.HomeActivity">
 
     <ListView
         android:id="@+id/listViewSubjects"
