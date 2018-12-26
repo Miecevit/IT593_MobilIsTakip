@@ -1,0 +1,79 @@
+<TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:stretchColumns="1">
+
+    <TableRow android:layout_marginLeft="50dp"
+        android:layout_marginTop="80dp"
+        android:layout_marginRight="30dp">
+
+        <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="Adı:"
+            android:textSize="15sp" />
+
+        <TextView
+            android:id="@+id/txtUserDetail_Name"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="[Adı]"
+            android:textSize="20sp" />
+    </TableRow>
+
+    <TableRow android:layout_marginLeft="50dp"
+        android:layout_marginRight="30dp">
+
+        <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="Soyadı:"
+            android:textSize="15sp" />
+
+        <TextView
+            android:id="@+id/txtUserDetail_LastName"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="[Soyadı]"
+            android:textSize="20sp" />
+    </TableRow>>
+
+    <TableRow android:layout_marginLeft="50dp"
+        android:layout_marginRight="30dp">
+
+        <TextView android:text="Eposta:"
+            android:textSize="15sp"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content" />
+
+        <TextView android:text="[Eposta]"
+            android:textSize="20sp"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/txtUserDetail_Eposta"/>
+    </TableRow>>
+
+    <TableRow android:layout_marginLeft="50dp"
+        android:layout_marginRight="30dp">
+
+        <TextView android:text="Yetki:"
+            android:textSize="15sp"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content" />
+
+        <TextView android:text="[Yetki]"
+            android:textSize="20sp"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/txtUserDetail_Auth"/>
+    </TableRow>>
+
+    <TableRow android:layout_marginLeft="50dp"
+        android:layout_marginRight="30dp">
+
+    </TableRow><![CDATA[>
+
+    >
+]]>
+</TableLayout>

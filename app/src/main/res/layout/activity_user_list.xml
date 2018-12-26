@@ -4,11 +4,11 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#c19d67"
-    tools:context="com.it593.dev.mobilistakip.HomeActivity">
+    tools:context="com.it593.dev.mobilistakip.UserListActivity">
 
     <ListView
-        android:id="@+id/listViewSubjects"
+        android:id="@+id/listViewUsers"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent"/>
 
 </RelativeLayout>

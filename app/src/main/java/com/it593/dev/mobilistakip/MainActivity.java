@@ -10,7 +10,7 @@ import android.widget.Button;
 public class MainActivity extends AppCompatActivity {
 
 
-    private Button girisbtn;
+    private Button userbtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -18,12 +18,12 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
 
-        girisbtn = (Button) findViewById(R.id.girisBtn);
+        userbtn = (Button) findViewById(R.id.userBtn);
 
-        girisbtn.setOnClickListener(new View.OnClickListener() {
+        userbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, HomeActivity.class);
+                Intent intent = new Intent(MainActivity.this, UserListActivity.class);
                 startActivity(intent);
 
 
