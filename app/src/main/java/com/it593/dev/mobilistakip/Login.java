@@ -24,6 +24,7 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
     private String username;
     private String password;
     User user;
+    private List<User> allUsers;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,13 +51,14 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
             public void run() {
 
                 toMain();
+               /* System.out.println(edtUserName.getText().toString());
+                System.out.println(edtPassword.getText().toString());
 
-
-/*
-                user = RestHelper.checkUserMethod(edtUserName.getText().toString(), edtPassword.getText().toString());
-
-
-
+            //user = UserHelper.checkUserMethod(edtUserName.getText().toString(), edtPassword.getText().toString());
+                user = UserHelper.getUserMethod(111);
+                allUsers = UserHelper.getAllActiveUsers();
+                System.out.println(user);
+                System.out.println(allUsers);
 
 
 

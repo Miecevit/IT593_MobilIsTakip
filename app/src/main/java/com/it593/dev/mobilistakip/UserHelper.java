@@ -14,16 +14,20 @@ import java.net.URLConnection;
 import java.util.ArrayList;
 import java.util.List;
 
-public class RestHelper {
 
-    public static URL getURL_checkUser (String Email, String password) {
+
+public class UserHelper {
+
+
+
+    public static URL getURL_checkUser (String userName, String password) {
         try {
             Uri.Builder builder = new Uri.Builder();
             builder.scheme("http")
                     .authority("it592.idegis.com.tr")
                     .appendPath("IT592Service.svc")
-                    .appendPath("CheckUser")
-                    .appendQueryParameter("email", Email)
+                    .appendPath("check_user")
+                    .appendQueryParameter("email", userName)
                     .appendQueryParameter("password", password);
 
             String urlStr = builder.build().toString();
@@ -43,12 +47,11 @@ public class RestHelper {
 
         try {
             URL url = getURL_checkUser(userName, password);
-            System.out.println("checkuser!");
             URLConnection urlConnection = url.openConnection();
             BufferedReader reader = new BufferedReader(new InputStreamReader(urlConnection.getInputStream()));
 
             String line = reader.readLine();
-
+            System.out.println(line);
             if (line != null && !line.isEmpty() && !line.equals("null")) {
                 JSONObject jsonResponse = new JSONObject(line);
                 user = getUserFromJSONObject(jsonResponse);
@@ -57,33 +60,14 @@ public class RestHelper {
             reader.close();
         }
         catch(Exception e){
-            //String msg = e.getMessage();
+            String msg = e.getMessage();
         }
-
+        System.out.println(user);
         return user;
     }
 
     private static User getUserFromJSONObject(JSONObject jsonObject) {
         User user = new User();
-
-
-
-
-        try {
-            user.setEmail(jsonObject.getString("email"));
-        }
-        catch (JSONException e1) {
-            e1.printStackTrace();
-        }
-
-
-        try {
-            user.setId(jsonObject.getInt("idUser"));
-        }
-        catch (JSONException e) {
-            e.printStackTrace();
-        }
-
 
         try {
             user.setFirstName(jsonObject.getString("first_name"));
@@ -93,15 +77,21 @@ public class RestHelper {
         }
 
         try {
-            user.setFirstName(jsonObject.getString("last_name"));
+            user.setLastName(jsonObject.getString("last_name"));
         }
         catch (JSONException e) {
             e.printStackTrace();
         }
 
+        try {
+            user.setEmail(jsonObject.getString("email"));
+        }
+        catch (JSONException e) {
+            e.printStackTrace();
+        }
 
         try {
-            user.setPassword(jsonObject.getString("password"));
+            user.setId(jsonObject.getInt("idUser"));
         }
         catch (JSONException e) {
             e.printStackTrace();
@@ -114,51 +104,29 @@ public class RestHelper {
             e.printStackTrace();
         }
 
+        try {
+            user.setPassword(jsonObject.getString("password"));
+        }
+        catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+
+
+
+
+
+
         return user;
     }
 
-    private static Message getMessageFromJSONObject(JSONObject jsonObject) {
-        Message message = new Message();
-
-
-
-
-        try {
-            message.setMesajText(jsonObject.getString("MessageContent"));
-        }
-        catch (JSONException e1) {
-            e1.printStackTrace();
-        }
-
-
-        try {
-            message.setGonderici(jsonObject.getString("SenderId"));
-        }
-        catch (JSONException e) {
-            e.printStackTrace();
-        }
-
-
-
-
-
-        try {
-            message.setZaman(jsonObject.getString("Time"));
-        }
-        catch (JSONException e) {
-            e.printStackTrace();
-        }
-
-        return message;
-    }
-
-    public static URL getURL_getAllUsers() {
+    public static URL getURL_getAllActiveUsers() {
         try {
             Uri.Builder builder = new Uri.Builder();
             builder.scheme("http")
                     .authority("it592.idegis.com.tr")
                     .appendPath("IT592Service.svc")
-                    .appendPath("GetAllUsers");
+                    .appendPath("get_all_users");
 
             String urlStr = builder.build().toString();
             URL url = new URL(urlStr);
@@ -169,55 +137,6 @@ public class RestHelper {
         }
 
         return null;
-    }
-
-    public static URL getURL_getAllMessages() {
-        try {
-            Uri.Builder builder = new Uri.Builder();
-            builder.scheme("http")
-                    .authority("it592.idegis.com.tr")
-                    .appendPath("IT592Service.svc")
-                    .appendPath("GetAllMessages");
-
-            String urlStr = builder.build().toString();
-            URL url = new URL(urlStr);
-            return url;
-        }
-        catch (MalformedURLException e1) {
-            e1.printStackTrace();
-        }
-
-        return null;
-    }
-
-    public static List<Message> getAllMessages() {
-
-        List<Message> listItems = new ArrayList<Message>();
-
-        try {
-            URL url = getURL_getAllUsers();
-            URLConnection urlConnection = url.openConnection();
-            BufferedReader reader = new BufferedReader(new InputStreamReader(urlConnection.getInputStream()));
-
-            String line = reader.readLine();
-
-            JSONObject jsonResponse = new JSONObject(line);
-            JSONArray jsonArray = jsonResponse.getJSONArray("GetAllMessages");
-
-            for (int i = 0; i < jsonArray.length(); i++) {
-                JSONObject jObject = (JSONObject)jsonArray.get(i);
-                Message message = getMessageFromJSONObject(jObject);
-                listItems.add(message);
-            }
-
-            reader.close();
-
-        }
-        catch(Exception e){
-
-        }
-
-        return listItems;
     }
 
     public static List<User> getAllActiveUsers() {
@@ -225,14 +144,14 @@ public class RestHelper {
         List<User> listItems = new ArrayList<User>();
 
         try {
-            URL url = getURL_getAllUsers();
+            URL url = getURL_getAllActiveUsers();
             URLConnection urlConnection = url.openConnection();
             BufferedReader reader = new BufferedReader(new InputStreamReader(urlConnection.getInputStream()));
 
             String line = reader.readLine();
 
             JSONObject jsonResponse = new JSONObject(line);
-            JSONArray jsonArray = jsonResponse.getJSONArray("GetAllUsers()");
+            JSONArray jsonArray = jsonResponse.getJSONArray("GetAllUsersResult");
 
             for (int i = 0; i < jsonArray.length(); i++) {
                 JSONObject jObject = (JSONObject)jsonArray.get(i);
@@ -279,8 +198,8 @@ public class RestHelper {
             Uri.Builder builder = new Uri.Builder();
             builder.scheme("http")
                     .authority("it592.idegis.com.tr")
-                    .appendPath("IT592Service")
-                    .appendPath("GetUserDetail")
+                    .appendPath("IT592Service.svc")
+                    .appendPath("get_user_detail")
                     .appendQueryParameter("idUser", String.valueOf(userId));
 
             String urlStr = builder.build().toString();

@@ -53,7 +53,7 @@ public class UserDetailActivity extends AppCompatActivity {
 
         @Override
         protected Void doInBackground(Void... params) {
-            selectedUser = RestHelper.getUserMethod(userId);
+            selectedUser = UserHelper.getUserMethod(userId);
             return null;
         }
     }

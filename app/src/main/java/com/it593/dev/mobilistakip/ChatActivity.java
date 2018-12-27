@@ -41,6 +41,9 @@ public class ChatActivity extends AppCompatActivity {
         floatingActionButton = (FloatingActionButton)findViewById(R.id.fab);
 
 
+        new getMessages().execute();
+
+
         Bundle bundle = getIntent().getExtras();
         if(bundle != null){
             // referansa ulaşıp ilgili sohbetleri getirebilmemiz için gerekli yapı
@@ -85,7 +88,7 @@ public class ChatActivity extends AppCompatActivity {
 
         @Override
         protected Void doInBackground(Void... params) {
-            chatLists = RestHelper.getAllMessages();
+            chatLists = MessageHelper.getAllMessages();
             if(chatLists != null)
                 System.out.println("GETALLMEssages!");
             System.out.println(chatLists);

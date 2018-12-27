@@ -36,9 +36,8 @@ public class UserListActivity extends AppCompatActivity {
 
         @Override
         protected Void doInBackground(Void... params) {
-            allUsers = RestHelper.getAllActiveUsers();
+            allUsers = UserHelper.getAllActiveUsers();
             if(allUsers != null)
-                System.out.println("GETALLUSERS!");
             System.out.println(allUsers);
             return null;
         }
@@ -48,7 +47,6 @@ public class UserListActivity extends AppCompatActivity {
             super.onPostExecute(result);
 
             if (allUsers != null) {
-                System.out.println("USERS!!!");
                 LoadUsers();
             }
             else
@@ -84,7 +82,7 @@ public class UserListActivity extends AppCompatActivity {
     }
 
     private void openUserDetails(int selectedUserId) {
-        Intent intent = new Intent(getApplicationContext(), UserDetailActivity.class);
+        Intent intent = new Intent(getApplicationContext(), ChatActivity.class);
         intent.putExtra("SELECTED_USERID", selectedUserId);
         startActivity(intent);
     }
