@@ -41,6 +41,8 @@ public class ChatActivity extends AppCompatActivity {
         floatingActionButton = (FloatingActionButton)findViewById(R.id.fab);
 
 
+        String UserName= getIntent().getStringExtra("USER_NAME");
+
         new getMessages().execute();
 
 

@@ -32,9 +32,9 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
         setContentView(R.layout.activity_login);
 
 
-        SharedPreferences p = getSharedPreferences("login_info",MODE_PRIVATE);
-        username = p.getString("username","noRecord");
-        password = p.getString("password","noRecord");
+
+
+
 
         btnLogin = (Button) findViewById(R.id.loginButton);
         btnLogin.setOnClickListener(this);
@@ -50,12 +50,16 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
             @Override
             public void run() {
 
-                toMain();
+
+                Intent intent = new Intent(getBaseContext(), ChatActivity.class);
+                intent.putExtra("USER_NAME", edtUserName.getText().toString());
+
+               toMain();
                /* System.out.println(edtUserName.getText().toString());
                 System.out.println(edtPassword.getText().toString());
 
-            //user = UserHelper.checkUserMethod(edtUserName.getText().toString(), edtPassword.getText().toString());
-                user = UserHelper.getUserMethod(111);
+                user = UserHelper.checkUserMethod(edtUserName.getText().toString(), edtPassword.getText().toString());
+
                 allUsers = UserHelper.getAllActiveUsers();
                 System.out.println(user);
                 System.out.println(allUsers);
@@ -64,7 +68,7 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
 
                 if (user != null) {
                     toMain();
-                } */
+                }*/
             }
         });
     }
