@@ -51,8 +51,7 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
             public void run() {
 
 
-                Intent intent = new Intent(getBaseContext(), ChatActivity.class);
-                intent.putExtra("USER_NAME", edtUserName.getText().toString());
+
 
                toMain();
                /* System.out.println(edtUserName.getText().toString());
