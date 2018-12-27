@@ -117,6 +117,41 @@ public class RestHelper {
         return user;
     }
 
+    private static Message getMessageFromJSONObject(JSONObject jsonObject) {
+        Message message = new Message();
+
+
+
+
+        try {
+            message.setMesajText(jsonObject.getString("MessageContent"));
+        }
+        catch (JSONException e1) {
+            e1.printStackTrace();
+        }
+
+
+        try {
+            message.setGonderici(jsonObject.getString("SenderId"));
+        }
+        catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+
+
+
+
+        try {
+            message.setZaman(jsonObject.getString("Time"));
+        }
+        catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        return message;
+    }
+
     public static URL getURL_getAllUsers() {
         try {
             Uri.Builder builder = new Uri.Builder();
@@ -136,6 +171,55 @@ public class RestHelper {
         return null;
     }
 
+    public static URL getURL_getAllMessages() {
+        try {
+            Uri.Builder builder = new Uri.Builder();
+            builder.scheme("http")
+                    .authority("it592.idegis.com.tr")
+                    .appendPath("IT592Service.svc")
+                    .appendPath("GetAllMessages");
+
+            String urlStr = builder.build().toString();
+            URL url = new URL(urlStr);
+            return url;
+        }
+        catch (MalformedURLException e1) {
+            e1.printStackTrace();
+        }
+
+        return null;
+    }
+
+    public static List<Message> getAllMessages() {
+
+        List<Message> listItems = new ArrayList<Message>();
+
+        try {
+            URL url = getURL_getAllUsers();
+            URLConnection urlConnection = url.openConnection();
+            BufferedReader reader = new BufferedReader(new InputStreamReader(urlConnection.getInputStream()));
+
+            String line = reader.readLine();
+
+            JSONObject jsonResponse = new JSONObject(line);
+            JSONArray jsonArray = jsonResponse.getJSONArray("GetAllMessages");
+
+            for (int i = 0; i < jsonArray.length(); i++) {
+                JSONObject jObject = (JSONObject)jsonArray.get(i);
+                Message message = getMessageFromJSONObject(jObject);
+                listItems.add(message);
+            }
+
+            reader.close();
+
+        }
+        catch(Exception e){
+
+        }
+
+        return listItems;
+    }
+
     public static List<User> getAllActiveUsers() {
 
         List<User> listItems = new ArrayList<User>();
@@ -148,7 +232,7 @@ public class RestHelper {
             String line = reader.readLine();
 
             JSONObject jsonResponse = new JSONObject(line);
-            JSONArray jsonArray = jsonResponse.getJSONArray("GetAllUsers");
+            JSONArray jsonArray = jsonResponse.getJSONArray("GetAllUsers()");
 
             for (int i = 0; i < jsonArray.length(); i++) {
                 JSONObject jObject = (JSONObject)jsonArray.get(i);

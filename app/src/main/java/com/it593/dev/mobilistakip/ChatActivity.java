@@ -1,6 +1,7 @@
 package com.it593.dev.mobilistakip;
 
 
+import android.os.AsyncTask;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -14,15 +15,22 @@ import android.widget.Toast;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 public class ChatActivity extends AppCompatActivity {
 
-    private ArrayList<Message> chatLists = new ArrayList<>();
+    private List<Message> chatLists = new ArrayList<>();
     private MessageAdapter messageAdapter;
     private String subject;
     private ListView listView;
     private FloatingActionButton floatingActionButton;
     private EditText inputChat;
+
+
+
+
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -33,8 +41,6 @@ public class ChatActivity extends AppCompatActivity {
         floatingActionButton = (FloatingActionButton)findViewById(R.id.fab);
 
 
-        listView.setAdapter(messageAdapter);
-
         Bundle bundle = getIntent().getExtras();
         if(bundle != null){
             // referansa ulaşıp ilgili sohbetleri getirebilmemiz için gerekli yapı
@@ -42,7 +48,6 @@ public class ChatActivity extends AppCompatActivity {
 
             setTitle(subject);
         }
-
 
 
 
@@ -69,4 +74,50 @@ public class ChatActivity extends AppCompatActivity {
             }
         });
     }
+
+
+    public class getMessages extends AsyncTask<Void, Void, Void>
+    {
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+        }
+
+        @Override
+        protected Void doInBackground(Void... params) {
+            chatLists = RestHelper.getAllMessages();
+            if(chatLists != null)
+                System.out.println("GETALLMEssages!");
+            System.out.println(chatLists);
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(Void result) {
+            super.onPostExecute(result);
+
+            if (chatLists != null) {
+                System.out.println("Messages!");
+                LoadMessages();
+            }
+            else
+                System.out.println("Can't get Messages!!");
+        }
+
+        @Override
+        protected void onProgressUpdate(Void... values) {
+            super.onProgressUpdate(values);
+        }
+
+        @Override
+        protected void onCancelled(Void result) {
+            super.onCancelled(result);
+        }
+    }
+
+    private void LoadMessages() {
+        messageAdapter = new MessageAdapter(this, chatLists);
+        listView.setAdapter(messageAdapter);
+    }
+
 }
