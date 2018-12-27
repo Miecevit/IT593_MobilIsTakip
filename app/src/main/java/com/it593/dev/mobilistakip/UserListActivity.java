@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -36,6 +37,9 @@ public class UserListActivity extends AppCompatActivity {
         @Override
         protected Void doInBackground(Void... params) {
             allUsers = RestHelper.getAllActiveUsers();
+            if(allUsers != null)
+                System.out.println("GETALLUSERS!");
+            System.out.println(allUsers);
             return null;
         }
 
@@ -44,8 +48,11 @@ public class UserListActivity extends AppCompatActivity {
             super.onPostExecute(result);
 
             if (allUsers != null) {
+                System.out.println("USERS!!!");
                 LoadUsers();
             }
+            else
+                System.out.println("Can't get USERS!!");
         }
 
         @Override

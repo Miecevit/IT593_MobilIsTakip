@@ -43,6 +43,7 @@ public class RestHelper {
 
         try {
             URL url = getURL_checkUser(userName, password);
+            System.out.println("checkuser!");
             URLConnection urlConnection = url.openConnection();
             BufferedReader reader = new BufferedReader(new InputStreamReader(urlConnection.getInputStream()));
 

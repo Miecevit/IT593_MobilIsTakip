@@ -18,7 +18,7 @@ import java.util.Date;
 public class ChatActivity extends AppCompatActivity {
 
     private ArrayList<Message> chatLists = new ArrayList<>();
-    private CustomAdapter customAdapter;
+    private MessageAdapter messageAdapter;
     private String subject;
     private ListView listView;
     private FloatingActionButton floatingActionButton;
@@ -33,7 +33,7 @@ public class ChatActivity extends AppCompatActivity {
         floatingActionButton = (FloatingActionButton)findViewById(R.id.fab);
 
 
-        listView.setAdapter(customAdapter);
+        listView.setAdapter(messageAdapter);
 
         Bundle bundle = getIntent().getExtras();
         if(bundle != null){
