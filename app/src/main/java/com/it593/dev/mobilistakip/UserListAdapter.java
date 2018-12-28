@@ -10,12 +10,12 @@ import android.widget.TextView;
 
 import java.util.List;
 
-public class UserListAdaper extends BaseAdapter {
+public class UserListAdapter extends BaseAdapter {
     private Activity _activity;
     private static LayoutInflater inflater = null;
     private List<User> _users;
 
-    public UserListAdaper(Activity activity, List<User> users) {
+    public UserListAdapter(Activity activity, List<User> users) {
         _activity = activity;
         _users = users;
         inflater = (LayoutInflater)_activity.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
