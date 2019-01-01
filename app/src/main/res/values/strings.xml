@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">IT593 Mobil İs Takip Chat</string>
+    <string name="title_activity_maps">Map</string>
 </resources>

@@ -156,22 +156,7 @@ public class Task {
         this._workOrderCount = _workOrderCount;
     }
 
-    public enum AUTHTYPE {
-        Yonetici(2),
-        Kullanici(1),
-        Yetkili(3),
-        Hicbiri(99);
-
-        private int numVal;
-
-        AUTHTYPE(int numVal) {
-            this.numVal = numVal;
-        }
-
-        public int getNumVal() {
-            return numVal;
-        }
-    }
+  
 
     public Task() {
     }
