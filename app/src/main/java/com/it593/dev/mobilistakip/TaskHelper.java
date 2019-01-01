@@ -69,7 +69,7 @@ public class TaskHelper {
     }
 
 
-
+    // GetAllTasks
     public static List<Task> getAllTasks() {
 
         List<Task> listItems = new ArrayList<Task>();
@@ -119,6 +119,7 @@ public class TaskHelper {
         return null;
     }
 
+    // GetTaskDetail
     public static Task getTaskDetail(int taskId) {
 
         Task item = null;
@@ -143,7 +144,7 @@ public class TaskHelper {
         return item;
     }
 
-    public static URL getURL_getTaskDetail (int taskId) {
+    public static URL getURL_getTaskDetail(int taskId) {
         try {
             Uri.Builder builder = new Uri.Builder();
             builder.scheme("http")
@@ -162,6 +163,145 @@ public class TaskHelper {
 
         return null;
     }
+
+    // GetTaskByStatue
+    public static Task getTaskByStatue(int statue) {
+
+        Task item = null;
+
+        try {
+            URL url = getURL_getTaskByStatue(statue);
+            URLConnection urlConnection = url.openConnection();
+            BufferedReader reader = new BufferedReader(new InputStreamReader(urlConnection.getInputStream()));
+
+            String line = reader.readLine();
+
+            JSONObject jsonResponse = new JSONObject(line);
+            JSONObject jsonObject = jsonResponse.getJSONObject("getTaskByStatueResult");
+            item = getTaskFromJSONObject(jsonObject);
+            reader.close();
+
+        }
+        catch(Exception e){
+            //String msg = e.getMessage();
+        }
+
+        return item;
+    }
+
+    public static URL getURL_getTaskByStatue(int statue) {
+        try {
+            Uri.Builder builder = new Uri.Builder();
+            builder.scheme("http")
+                    .authority("it592.idegis.com.tr")
+                    .appendPath("IT592Service.svc")
+                    .appendPath("get_task_by_statue")
+                    .appendQueryParameter("statue", String.valueOf(statue));
+
+            String urlStr = builder.build().toString();
+            URL url = new URL(urlStr);
+            return url;
+        }
+        catch (MalformedURLException e1) {
+            e1.printStackTrace();
+        }
+
+        return null;
+    }
+
+    // GetTaskByType
+    public static Task getTaskByType(int type) {
+
+        Task item = null;
+
+        try {
+            URL url = getURL_getTaskByType(type);
+            URLConnection urlConnection = url.openConnection();
+            BufferedReader reader = new BufferedReader(new InputStreamReader(urlConnection.getInputStream()));
+
+            String line = reader.readLine();
+
+            JSONObject jsonResponse = new JSONObject(line);
+            JSONObject jsonObject = jsonResponse.getJSONObject("getTaskByTypeResult");
+            item = getTaskFromJSONObject(jsonObject);
+            reader.close();
+
+        }
+        catch(Exception e){
+            //String msg = e.getMessage();
+        }
+
+        return item;
+    }
+
+    public static URL getURL_getTaskByType(int type) {
+        try {
+            Uri.Builder builder = new Uri.Builder();
+            builder.scheme("http")
+                    .authority("it592.idegis.com.tr")
+                    .appendPath("IT592Service.svc")
+                    .appendPath("get_task_by_type")
+                    .appendQueryParameter("type", String.valueOf(type));
+
+            String urlStr = builder.build().toString();
+            URL url = new URL(urlStr);
+            return url;
+        }
+        catch (MalformedURLException e1) {
+            e1.printStackTrace();
+        }
+
+        return null;
+    }
+
+    // Ecevit buraya bir bakabilir misin, User da dönmeli dönmemeli sorunsalı yaşadım
+    // GetTaskByTypeAndUser
+    public static Task getTaskByTypeAndUser(int type, int userId) {
+
+        Task item = null;
+
+        try {
+            URL url = getURL_getTaskByTypeAndUser(type, userId);
+            URLConnection urlConnection = url.openConnection();
+            BufferedReader reader = new BufferedReader(new InputStreamReader(urlConnection.getInputStream()));
+
+            String line = reader.readLine();
+
+            JSONObject jsonResponse = new JSONObject(line);
+            JSONObject jsonObject = jsonResponse.getJSONObject("getTaskByTypeAndUserResult");
+            item = getTaskFromJSONObject(jsonObject);
+            reader.close();
+
+        }
+        catch(Exception e){
+            //String msg = e.getMessage();
+        }
+
+        return item;
+    }
+
+    public static URL getURL_getTaskByTypeAndUser(int type, int userId) {
+        try {
+            Uri.Builder builder = new Uri.Builder();
+            builder.scheme("http")
+                    .authority("it592.idegis.com.tr")
+                    .appendPath("IT592Service.svc")
+                    .appendPath("get_task_by_type_and_user")
+                    .appendQueryParameter("type", String.valueOf(type)
+                    .appendQueryParameter("idUser", String.valueOf(userId)));
+
+            String urlStr = builder.build().toString();
+            URL url = new URL(urlStr);
+            return url;
+        }
+        catch (MalformedURLException e1) {
+            e1.printStackTrace();
+        }
+
+        return null;
+    }
+
+
 
 
 }
