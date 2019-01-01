@@ -21,49 +21,15 @@ import java.util.List;
 public class TaskHelper {
     // task e göre düzenlenecek.
     private static User getTaskFromJSONObject(JSONObject jsonObject) {
-        Task task = new Task();
+        //Task task = new Task();
 
-        try {
-            user.setFirstName(jsonObject.getString("first_name"));
-        }
-        catch (JSONException e) {
-            e.printStackTrace();
-        }
+       // try {
 
-        try {
-            user.setLastName(jsonObject.getString("last_name"));
-        }
-        catch (JSONException e) {
-            e.printStackTrace();
-        }
-
-        try {
-            user.setEmail(jsonObject.getString("email"));
-        }
-        catch (JSONException e) {
-            e.printStackTrace();
-        }
-
-        try {
-            user.setId(jsonObject.getInt("idUser"));
-        }
-        catch (JSONException e) {
-            e.printStackTrace();
-        }
-
-        try {
-            user.setJob(jsonObject.getString("job"));
-        }
-        catch (JSONException e) {
-            e.printStackTrace();
-        }
-
-        try {
-            user.setPassword(jsonObject.getString("password"));
-        }
-        catch (JSONException e) {
-            e.printStackTrace();
-        }
+          //  user.setFirstName(jsonObject.getString("first_name"));
+      //  }
+        //catch (JSONException e) {
+       //     e.printStackTrace();
+       // }
 
         return null;
     }
