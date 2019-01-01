@@ -42,6 +42,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
 
     // (5)
+
     private MyLocationListener mylistener;
     private LocationManager locationManager;
     private String provider;
