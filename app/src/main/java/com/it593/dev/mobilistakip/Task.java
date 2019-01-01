@@ -156,6 +156,7 @@ public class Task {
         this._workOrderCount = _workOrderCount;
     }
 
+    // enumlar ayıklanacak. type, statue icin.
     public enum AUTHTYPE {
         Yonetici(2),
         Kullanici(1),
