@@ -4,22 +4,31 @@ import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.graphics.Point;
 import android.location.Criteria;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
+import android.net.Uri;
+import android.os.AsyncTask;
+import android.provider.MediaStore;
 import android.provider.Settings;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
+import android.util.Log;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.Button;
+import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -33,13 +42,19 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback, GoogleMap.OnMarkerDragListener, GoogleMap.OnMapLongClickListener {
+    private static final String TAG = "MapActivity";
 
     private GoogleMap mMap;
-
+    private Boolean mLocationPermissionsGranted = false;
+    private EditText mSearchText;
+    private ImageView mGps;
+    String service;
+    private List<Task> taskLists = new ArrayList<>();
 
     // (5)
 
@@ -54,14 +69,17 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
     // (7)
     private static final double RADIUS_OF_EARTH_METERS = 6371009;
-    private List<DraggableCircle> mCircles = new ArrayList<>(1);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_maps);
+        mSearchText = (EditText) findViewById(R.id.input_search);
+        mGps = (ImageView) findViewById(R.id.ic_gps);
 
 
+
+        new getTask().execute();
 
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
@@ -102,31 +120,93 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
         // (4)
 
-        mMap.setInfoWindowAdapter(new GoogleMap.InfoWindowAdapter() {
-            @Override
-            public View getInfoWindow(Marker marker) {
-                return null;
-            }
 
-            @Override
-            public View getInfoContents(Marker marker) {
-                View v = getLayoutInflater().inflate(R.layout.markerlayout, null);
-                TextView info1 = (TextView) v.findViewById(R.id.tvMarker);
-                Button btn = v.findViewById(R.id.btnMarker);
-
-                info1.setText("Isik Üniversitesi : " + marker.getPosition().latitude + " - " + marker.getPosition().longitude);
-                return v;
-            }
-        });
 
         // (6)
         googleMap.getUiSettings().setZoomGesturesEnabled(true);
 
         // (7)
-        DraggableCircle circle = new DraggableCircle(latLngIsik, 1000);
-        mCircles.add(circle);
+
+    }
+    public class getTask extends AsyncTask<Void, Void, Void>
+    {
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+        }
+
+        @Override
+        protected Void doInBackground(Void... params) {
+            taskLists = TaskHelper.getAllTasks();
+            if(taskLists != null)
+                System.out.println("GETALLTasks!");
+            System.out.println(taskLists);
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(Void result) {
+            super.onPostExecute(result);
+
+            if (taskLists != null) {
+                System.out.println("Tasks!");
+                LoadTasks();
+            }
+            else
+                System.out.println("Can't get Tasks!!");
+        }
+
+        @Override
+        protected void onProgressUpdate(Void... values) {
+            super.onProgressUpdate(values);
+        }
+
+        @Override
+        protected void onCancelled(Void result) {
+            super.onCancelled(result);
+        }
+    }
+    private void LoadTasks() {
+        //taskadapter = new MessageAdapter(this, chatLists);
+        //listView.setAdapter(taskadapter);
+    }
+    private void moveCamera(LatLng latLng, float zoom, String title,String uripath)  {
+        Log.d(TAG, "moveCamera: moving the camera to: lat: " + latLng.latitude + ", lng: " + latLng.longitude );
+        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, zoom));
+
+        Bitmap bm= null;
+        if(uripath!=null){
+            try {
+                bm = MediaStore.Images.Media.getBitmap(getContentResolver(), Uri.parse(uripath));
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+
+        if (title!=null){
+            if(!title.equals("My Location")){
+                if(bm!=null){
+                    MarkerOptions options = new MarkerOptions()
+                            .position(latLng)
+                            .title(title).icon(BitmapDescriptorFactory.fromBitmap(bm));
+                    mMap.addMarker(options);
+                }else {
+                    MarkerOptions options = new MarkerOptions()
+                            .position(latLng)
+                            .title(title).icon(BitmapDescriptorFactory.fromResource(R.mipmap.ic_launcher_logo));
+                    mMap.addMarker(options);
+                }
+
+            }
+        }
+
+
+        hideSoftKeyboard();
     }
 
+    private void hideSoftKeyboard(){
+        this.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
+    }
     @Override
     public void onMarkerDragStart(Marker marker) {
 
@@ -149,18 +229,11 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         LatLng radiusLatLng = mMap.getProjection().fromScreenLocation(new Point(
                 view.getHeight() * 3 / 4, view.getWidth() * 3 / 4));
 
-        // Create the circle.
-        DraggableCircle circle = new DraggableCircle(latLng, toRadiusMeters(latLng, radiusLatLng));
-        mCircles.add(circle);
     }
 
     // (7)
     private void onMarkerMoved(Marker marker) {
-        for (DraggableCircle draggableCircle : mCircles) {
-            if (draggableCircle.onMarkerMoved(marker)) {
-                break;
-            }
-        }
+
     }
 
     // (2)
@@ -241,67 +314,5 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             Toast.makeText(MapsActivity.this, "Provider " + provider + " disabled!",
                     Toast.LENGTH_SHORT).show();
         }
-    }
-
-    // (7)
-    private class DraggableCircle {
-        private final Marker mCenterMarker;
-        private final Marker mRadiusMarker;
-        private final Circle mCircle;
-        private double mRadiusMeters;
-
-        public DraggableCircle(LatLng center, double radiusMeters) {
-            mRadiusMeters = radiusMeters;
-            mCenterMarker = mMap.addMarker(new MarkerOptions()
-                    .position(center)
-                    .draggable(true));
-            mRadiusMarker = mMap.addMarker(new MarkerOptions()
-                    .position(toRadiusLatLng(center, radiusMeters))
-                    .draggable(true)
-                    .icon(BitmapDescriptorFactory.defaultMarker(
-                            BitmapDescriptorFactory.HUE_AZURE)));
-            mCircle = mMap.addCircle(new CircleOptions()
-                    .center(center)
-                    .radius(radiusMeters)
-                    .strokeWidth(2)
-                    .strokeColor(Color.YELLOW)
-                    .fillColor(0x30ff0000)
-                    .clickable(true));
-        }
-
-        public boolean onMarkerMoved(Marker marker) {
-            if (marker.equals(mCenterMarker)) {
-                mCircle.setCenter(marker.getPosition());
-                mRadiusMarker.setPosition(toRadiusLatLng(marker.getPosition(), mRadiusMeters));
-                return true;
-            }
-            if (marker.equals(mRadiusMarker)) {
-                mRadiusMeters =
-                        toRadiusMeters(mCenterMarker.getPosition(), mRadiusMarker.getPosition());
-                mCircle.setRadius(mRadiusMeters);
-                return true;
-            }
-            return false;
-        }
-
-        public void setClickable(boolean clickable) {
-            mCircle.setClickable(clickable);
-        }
-    }
-
-    // (7)
-    /** Generate LatLng of radius marker */
-    private static LatLng toRadiusLatLng(LatLng center, double radiusMeters) {
-        double radiusAngle = Math.toDegrees(radiusMeters / RADIUS_OF_EARTH_METERS) /
-                Math.cos(Math.toRadians(center.latitude));
-        return new LatLng(center.latitude, center.longitude + radiusAngle);
-    }
-
-    // (7)
-    private static double toRadiusMeters(LatLng center, LatLng radius) {
-        float[] result = new float[1];
-        Location.distanceBetween(center.latitude, center.longitude,
-                radius.latitude, radius.longitude, result);
-        return result[0];
     }
 }
