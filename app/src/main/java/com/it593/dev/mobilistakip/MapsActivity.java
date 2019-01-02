@@ -167,7 +167,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         }
     }
     private void LoadTasks() {
-        //taskadapter = new MessageAdapter(this, chatLists);
+        //taskadapter = new TaskAdapter(this, taskLists);
         //listView.setAdapter(taskadapter);
     }
     private void moveCamera(LatLng latLng, float zoom, String title,String uripath)  {
