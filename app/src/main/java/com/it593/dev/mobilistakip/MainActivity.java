@@ -11,6 +11,7 @@ public class MainActivity extends AppCompatActivity {
 
 
     private Button userbtn;
+    private Button taskbtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,6 +25,18 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(MainActivity.this, UserListActivity.class);
+                startActivity(intent);
+
+
+            }
+        });
+
+        taskbtn = (Button) findViewById(R.id.taskBtn);
+
+        taskbtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, TaskListActivity.class);
                 startActivity(intent);
 
 
