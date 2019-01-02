@@ -1,8 +1,8 @@
 package com.it593.dev.mobilistakip;
 
+import android.icu.text.SimpleDateFormat;
 import android.net.Uri;
 
-import com.google.android.gms.tasks.Task;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -13,26 +13,181 @@ import java.io.InputStreamReader;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLConnection;
+import java.text.ParseException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 
 
 public class TaskHelper {
-    // task e göre düzenlenecek.
+
     private static Task getTaskFromJSONObject(JSONObject jsonObject) {
-        //Task task = new Task();
+        Task task = new Task();
 
-       // try {
+        try {
+            task.setidTask(jsonObject.getInt("idTask"));
+        }
+        catch (JSONException e) {
+            e.printStackTrace();
+        }
 
-          //  user.setFirstName(jsonObject.getString("first_name"));
-      //  }
-        //catch (JSONException e) {
-       //     e.printStackTrace();
-       // }
+        try {
+            task.setName(jsonObject.getString("name"));
+        }
+        catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        try {
+            task.setShort_description(jsonObject.getString("short_description"));
+        }
+        catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        try {
+            task.setLong_description(jsonObject.getString("long_description"));
+        }
+        catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+
+
+        try {
+
+            String dateStr = jsonObject.getString("created_date");
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+            Date date = sdf.parse(dateStr);
+
+
+            task.setCreated_date(date);
+        }
+        catch (JSONException e) {
+            e.printStackTrace();
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
+
+        try {
+            String dateStr = jsonObject.getString("modified_date");
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+            Date date = sdf.parse(dateStr);
+
+
+            task.setModified_date(date);
+        }
+        catch (JSONException e) {
+            e.printStackTrace();
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
+        try {
+            task.setLocation(jsonObject.getString("location"));
+        }
+        catch (JSONException e) {
+            e.printStackTrace();
+        }
+        try {
+            task.setTask_statue(jsonObject.getString("task_statue"));
+        }
+        catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        try {
+            task.setLocation(jsonObject.getString("location"));
+        }
+        catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        try {
+
+            String dateStr = jsonObject.getString("start_date");
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+            Date date = sdf.parse(dateStr);
+
+
+            task.setStart_date(date);
+        }
+        catch (JSONException e) {
+            e.printStackTrace();
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
+
+        try {
+            String dateStr = jsonObject.getString("end_date");
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+            Date date = sdf.parse(dateStr);
+
+
+            task.setEnd_date(date);
+        }
+        catch (JSONException e) {
+            e.printStackTrace();
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
+        try {
+            task.setHandled_by(jsonObject.getInt("handled_by"));
+        }
+        catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        try {
+            task.setCreated_by(jsonObject.getInt("created_by"));
+        }
+        catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        try {
+            task.setModified_by(jsonObject.getInt("modified_by"));
+        }
+        catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        try {
+            task.setLink(jsonObject.getString("link"));
+        }
+        catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        try {
+            task.setTask_type(jsonObject.getString("task_type"));
+        }
+        catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        try {
+            task.setPhoto(jsonObject.getString("photo"));
+        }
+        catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+
+
+
+
+
+
 
         return null;
     }
+
+
 
 
     // GetAllTasks

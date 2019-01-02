@@ -1,12 +1,15 @@
 package com.it593.dev.mobilistakip;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class Task {
+public class Task implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
 
+
+    private int idTask;
     private String name;
     private String short_description;
     private String long_description;
@@ -24,8 +27,20 @@ public class Task {
     private String photo;
     private String _workOrderCount = "0";
 
+    public Task() {
+    }
+
     public static long getSerialVersionUID() {
         return serialVersionUID;
+    }
+
+    public int getidTask(){
+        return idTask;
+    }
+
+    public void setidTask(int idTask){
+
+        this.idTask = idTask;
     }
 
     public String getName() {
@@ -156,8 +171,7 @@ public class Task {
         this._workOrderCount = _workOrderCount;
     }
 
-    public Task() {
-    }
+
 
 
 
