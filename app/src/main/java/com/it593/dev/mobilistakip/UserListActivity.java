@@ -19,11 +19,11 @@ public class UserListActivity extends AppCompatActivity {
 
 
     private List<User> allUsers;
-    private UserListAdaper adapter;
+    private UserListAdapter adapter;
     private ListView listViewUsers;
 
     private void LoadUsers() {
-        adapter = new UserListAdaper(this, allUsers);
+        adapter = new UserListAdapter(this, allUsers);
         listViewUsers.setAdapter(adapter);
     }
 

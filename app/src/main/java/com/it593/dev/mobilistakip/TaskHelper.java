@@ -20,7 +20,7 @@ import java.util.List;
 
 public class TaskHelper {
     // task e göre düzenlenecek.
-    private static User getTaskFromJSONObject(JSONObject jsonObject) {
+    private static Task getTaskFromJSONObject(JSONObject jsonObject) {
         //Task task = new Task();
 
        // try {
@@ -253,8 +253,9 @@ public class TaskHelper {
                     .authority("it592.idegis.com.tr")
                     .appendPath("IT592Service.svc")
                     .appendPath("get_task_by_type_and_user")
-                    .appendQueryParameter("type", String.valueOf(type)
-                    .appendQueryParameter("idUser", String.valueOf(userId)));
+                    .appendQueryParameter("type", String.valueOf(type))
+                    .appendQueryParameter("idUser", String.valueOf(userId));
+
 
             String urlStr = builder.build().toString();
             URL url = new URL(urlStr);
