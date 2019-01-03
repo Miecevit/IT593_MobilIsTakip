@@ -39,7 +39,7 @@
 
     </LinearLayout>
 
-    <!--    <EditText
+    <EditText
             android:id="@+id/inputChat"
             android:layout_alignParentBottom="true"
             android:layout_width="match_parent"
@@ -53,6 +53,6 @@
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|end"
         android:layout_margin="16dp"
-        app:srcCompat="@android:drawable/ic_menu_send" />-->
+        app:srcCompat="@android:drawable/ic_menu_send" />
 
 </RelativeLayout>

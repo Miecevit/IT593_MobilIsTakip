@@ -203,7 +203,7 @@ public class TaskHelper {
             String line = reader.readLine();
 
             JSONObject jsonResponse = new JSONObject(line);
-            JSONArray jsonArray = jsonResponse.getJSONArray("getAllTasksResult");
+            JSONArray jsonArray = jsonResponse.getJSONArray("GetAllTasksResult");
 
             for (int i = 0; i < jsonArray.length(); i++) {
                 JSONObject jObject = (JSONObject)jsonArray.get(i);

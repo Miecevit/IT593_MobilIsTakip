@@ -85,7 +85,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
-        userLocationFAB();
+        //userLocationFAB();
     }
 
 
@@ -193,7 +193,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 }else {
                     MarkerOptions options = new MarkerOptions()
                             .position(latLng)
-                            .title(title).icon(BitmapDescriptorFactory.fromResource(R.mipmap.ic_launcher_logo));
+                            .title(title).icon(BitmapDescriptorFactory.fromResource(R.mipmap.ic_launcher));
                     mMap.addMarker(options);
                 }
 
@@ -250,7 +250,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         return(PackageManager.PERMISSION_GRANTED == ContextCompat.checkSelfPermission(MapsActivity.this, perm));
     }
 
-    private void userLocationFAB(){
+   /* private void userLocationFAB(){
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.myLocationButton);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -284,7 +284,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 }
             }
         });
-    }
+    } */
 
 
     // (5)

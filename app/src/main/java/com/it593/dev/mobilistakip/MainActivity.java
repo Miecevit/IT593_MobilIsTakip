@@ -12,6 +12,7 @@ public class MainActivity extends AppCompatActivity {
 
     private Button userbtn;
     private Button taskbtn;
+    private Button mapbtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,6 +38,18 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(MainActivity.this, TaskListActivity.class);
+                startActivity(intent);
+
+
+            }
+        });
+
+        mapbtn = (Button) findViewById(R.id.mapBtn);
+
+        mapbtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, MapsActivity.class);
                 startActivity(intent);
 
 

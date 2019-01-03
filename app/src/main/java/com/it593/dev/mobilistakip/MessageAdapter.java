@@ -53,7 +53,7 @@ public class MessageAdapter extends BaseAdapter {
         View vi = convertView;
 
         if( convertView == null)
-            vi = inflater.inflate(R.layout.list_item_users, null);
+            vi = inflater.inflate(R.layout.left_item_layout, null);
 
         TextView txtGonderen = (TextView)vi.findViewById(R.id.txtUserLeft);
         TextView txtContent = (TextView)vi.findViewById(R.id.txtMessageLeft);
