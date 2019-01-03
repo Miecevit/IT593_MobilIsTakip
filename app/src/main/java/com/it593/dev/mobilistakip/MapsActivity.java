@@ -26,6 +26,7 @@ import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -48,6 +49,9 @@ import java.util.List;
 
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback, GoogleMap.OnMarkerDragListener, GoogleMap.OnMapLongClickListener {
     private static final String TAG = "MapActivity";
+    private TaskListAdapter taskListAdapter;
+    private ListView listView;
+    private static final float DEFAULT_ZOOM = 15f;
 
     private GoogleMap mMap;
     private Boolean mLocationPermissionsGranted = false;
@@ -167,12 +171,27 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         }
     }
     private void LoadTasks() {
-        //taskadapter = new TaskAdapter(this, taskLists);
-        //listView.setAdapter(taskadapter);
+        taskListAdapter = new TaskListAdapter(this, taskLists);
+        listView.setAdapter(taskListAdapter);
+
+        String location=taskLists.get(0).getLocation();
+        String name=taskLists.get(0).getName();
+        String uripath=taskLists.get(0).getPhoto();
+        String statu=taskLists.get(0).getTask_statue();
+
+        Double latitute= Double.valueOf(location.lastIndexOf(","));
+
+        Double longtitude= Double.valueOf(location.lastIndexOf(","));
+        moveCamera(new LatLng(latitute,longtitude), DEFAULT_ZOOM,
+                name,uripath);
+
     }
+
+
     private void moveCamera(LatLng latLng, float zoom, String title,String uripath)  {
         Log.d(TAG, "moveCamera: moving the camera to: lat: " + latLng.latitude + ", lng: " + latLng.longitude );
         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, zoom));
+
 
         Bitmap bm= null;
         if(uripath!=null){
