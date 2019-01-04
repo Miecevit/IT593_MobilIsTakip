@@ -173,17 +173,26 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     private void LoadTasks() {
         taskListAdapter = new TaskListAdapter(this, taskLists);
         listView.setAdapter(taskListAdapter);
+        String location;
+        String name;
+        String uripath;
+        String statu;
+        Double latitute,longtitude;
+        for(int i=0;i<taskLists.size();i++){
+            location=taskLists.get(i).getLocation();
+            name=taskLists.get(i).getName();
+            uripath=taskLists.get(i).getPhoto();
+            statu=taskLists.get(i).getTask_statue();
 
-        String location=taskLists.get(0).getLocation();
-        String name=taskLists.get(0).getName();
-        String uripath=taskLists.get(0).getPhoto();
-        String statu=taskLists.get(0).getTask_statue();
+            latitute= Double.valueOf(location.lastIndexOf(","));
 
-        Double latitute= Double.valueOf(location.lastIndexOf(","));
+            longtitude= Double.valueOf(location.lastIndexOf(","));
+            moveCamera(new LatLng(latitute,longtitude), DEFAULT_ZOOM,
+                    name,uripath);
+        }
 
-        Double longtitude= Double.valueOf(location.lastIndexOf(","));
-        moveCamera(new LatLng(latitute,longtitude), DEFAULT_ZOOM,
-                name,uripath);
+
+
 
     }
 
