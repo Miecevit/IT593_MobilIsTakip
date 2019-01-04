@@ -85,7 +85,7 @@ public class TaskListActivity extends AppCompatActivity {
     }
 
     private void openTaskDetails(int selectedTaskId) {
-        Intent intent = new Intent(getApplicationContext(), ChatActivity.class);
+        Intent intent = new Intent(getApplicationContext(), TaskDetailsActivity.class);
         intent.putExtra("SELECTED_TaskID", selectedTaskId);
         startActivity(intent);
     }

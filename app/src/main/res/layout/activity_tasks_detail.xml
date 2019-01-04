@@ -1,0 +1,134 @@
+<TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:stretchColumns="1">
+
+    <TableRow android:layout_marginLeft="50dp"
+        android:layout_marginTop="80dp"
+        android:layout_marginRight="30dp">
+
+        <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="Adı:"
+            android:textSize="15sp" />
+
+        <TextView
+            android:id="@+id/txtTaskDetail_Name"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="[Adı]"
+            android:textSize="20sp" />
+    </TableRow><![CDATA[
+
+    >
+
+    ]]>
+
+    <TableRow
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginLeft="50dp"
+        android:layout_marginRight="30dp">
+
+        <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="Açıklama:"
+            android:textSize="15sp" />
+
+        <TextView
+            android:id="@+id/txtTaskDetail_LongDesc"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="[Açıklama]"
+            android:textSize="20sp" />
+    </TableRow>
+
+    <TableRow android:layout_marginLeft="50dp"
+        android:layout_marginRight="30dp">
+
+        <TextView android:text="Oluşturulma:"
+            android:textSize="15sp"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content" />
+
+        <TextView android:text="[Oluşturulma]"
+            android:textSize="20sp"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/txtTaskDetail_Created"/>
+    </TableRow>>
+
+    <TableRow android:layout_marginLeft="50dp"
+        android:layout_marginRight="30dp">
+
+        <TextView android:text="Başlangıç:"
+            android:textSize="15sp"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content" />
+
+        <TextView android:text="[Başlangıç]"
+            android:textSize="20sp"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/txtTaskDetail_Start"/>
+    </TableRow>>
+    <TableRow android:layout_marginLeft="50dp"
+        android:layout_marginRight="30dp">
+
+        <TextView android:text="Bitiş:"
+            android:textSize="15sp"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content" />
+
+        <TextView android:text="[Bitiş]"
+            android:textSize="20sp"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/txtTaskDetail_End"/>
+    </TableRow>>
+
+    <TableRow android:layout_marginLeft="50dp"
+        android:layout_marginRight="30dp">
+
+        <TextView android:text="Durum:"
+            android:textSize="15sp"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content" />
+
+        <TextView android:text="[Durum]"
+            android:textSize="20sp"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/txtTaskDetail_Status"/>
+    </TableRow>>
+
+    <TableRow android:layout_marginLeft="50dp"
+        android:layout_marginRight="30dp">
+
+        <TextView android:text="Tip:"
+            android:textSize="15sp"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content" />
+
+        <TextView android:text="[Tip]"
+            android:textSize="20sp"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/txtTaskDetail_Type"/>
+    </TableRow>>
+
+
+    <TableRow
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginLeft="50dp"
+        android:layout_marginRight="30dp">
+
+    </TableRow><![CDATA[>
+
+    >
+]]>
+</TableLayout>

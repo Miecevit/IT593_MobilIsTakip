@@ -23,7 +23,7 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
     EditText edtUserName, edtPassword;
     private String username;
     private String password;
-    User user;
+    User user = new User();
     private List<User> allUsers;
 
     @Override

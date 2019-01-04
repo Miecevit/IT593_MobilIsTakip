@@ -54,7 +54,8 @@
             android:value="AIzaSyA48zlt7Ic2O8KxOyJ6mnX-kGJJRf8qrq8" />
 
         <activity android:name=".TaskListActivity" />
-        <activity android:name=".TaskListAdapter" />
+        <activity android:name=".MapsActivity" />
+        <activity android:name=".TaskDetailsActivity"></activity>
     </application>
 
 </manifest>

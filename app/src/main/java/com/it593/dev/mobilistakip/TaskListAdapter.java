@@ -45,7 +45,7 @@ public class TaskListAdapter extends BaseAdapter {
         View vi = convertView;
 
         if( convertView == null)
-            vi = inflater.inflate(R.layout.list_item_users, null);
+            vi = inflater.inflate(R.layout.list_item_task, null);
 
         TextView txtTask_Id = (TextView)vi.findViewById(R.id.txtTask_Id);
         TextView txtTask_Name = (TextView)vi.findViewById(R.id.txtTask_name);
@@ -58,7 +58,7 @@ public class TaskListAdapter extends BaseAdapter {
                 int id = task.getidTask();
 
                 if (txtTask_Id != null)
-                    txtTask_Id.setText(String.valueOf(id));
+                    txtTask_Id.setText("ID: "+ String.valueOf(id));
 
                 if (txtTask_Name != null)
                     txtTask_Name.setText("Adı: " + task.getName());
